@@ -14,7 +14,6 @@ import static com.codeborne.selenide.Selenide.$$;
 @Component
 public class AuthenticationPage extends BasePage {
 
-    private final String DOMAIN = ".com";
     private SelenideElement createAccountField = $("#email_create");
     private SelenideElement emailField = $("#email");
     private SelenideElement passwordField = $("#passwd");
@@ -30,6 +29,12 @@ public class AuthenticationPage extends BasePage {
         log.info("Attempting to log in using {} email and {} password.", emailAddress, password);
         sendTextToField(emailField, emailAddress);
         sendTextToField(passwordField, password).pressEnter();
+    }
+
+    public void login() {
+        log.info("Logging in with default credentials.");
+        sendTextToField(emailField, "");
+        sendTextToField(passwordField, "password");
     }
 
     public boolean authenticationFailed() {

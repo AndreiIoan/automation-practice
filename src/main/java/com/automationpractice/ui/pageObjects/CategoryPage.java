@@ -6,12 +6,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class CategoryPage extends BasePage {
 
-    @Override
-    public void addToCart() {
+    public void addProductToCart() {
 
     }
 
-    @Override
     public void quickViewProduct() {
 
     }
