@@ -39,6 +39,10 @@ public class ChromeWebDriverProvider implements WebDriverProvider {
     private ChromeOptions createChromeOptions() {
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.setAcceptInsecureCerts(true);
+        chromeOptions.setExperimentalOption("useAutomationExtension", false);
+        chromeOptions.addArguments("--disable-infobars");
+        chromeOptions.addArguments("--no-sandbox");
+        chromeOptions.addArguments("--disable-xss-auditor");
         chromeOptions.setUnhandledPromptBehaviour(UnexpectedAlertBehaviour.ACCEPT);
         return chromeOptions;
     }
