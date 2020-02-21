@@ -12,12 +12,22 @@ import static com.codeborne.selenide.Selenide.$$;
 @Slf4j
 public abstract class BasePage {
 
+    public static String generatedEmailAddress;
+
     protected SelenideElement sendTextToField(SelenideElement selenideElement, String text) {
         return selenideElement.waitUntil(Condition.exist, Configuration.timeout).setValue(text);
     }
 
+    protected void selectValueFromDropdown(SelenideElement selenideElement, String value) {
+        selenideElement.waitUntil(Condition.exist, Configuration.timeout).selectOption(value);
+    }
+
     protected void clickElement(SelenideElement selenideElement) {
-        selenideElement.click();
+        selenideElement.waitUntil(Condition.exist, Configuration.timeout).click();
+    }
+
+    protected boolean errorNotPresent() {
+        return $$("div.alert").size() == 0;
     }
 
     public static String generateRandomEmail() {
