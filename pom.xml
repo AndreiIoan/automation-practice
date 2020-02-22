@@ -28,12 +28,10 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-configuration-processor</artifactId>
-			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -114,7 +112,7 @@
 			<artifactId>selenium-support</artifactId>
 			<version>3.8.1</version>
 		</dependency>
-	</dependencies>
+    </dependencies>
 
 	<build>
         <plugins>
@@ -141,6 +139,10 @@
                     <suiteXmlFiles>testng.xml</suiteXmlFiles>
                     <parallel>methods</parallel>
                     <threadCount>4</threadCount>
+					<systemPropertyVariables>
+						<org.slf4j.simpleLogger.defaultLogLevel>DEBUG</org.slf4j.simpleLogger.defaultLogLevel>
+						<org.slf4j.simpleLogger.showDateTime>true</org.slf4j.simpleLogger.showDateTime>
+					</systemPropertyVariables>
                 </configuration>
             </plugin>
         </plugins>

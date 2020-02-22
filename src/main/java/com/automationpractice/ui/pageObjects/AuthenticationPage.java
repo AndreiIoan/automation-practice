@@ -7,11 +7,9 @@ import com.codeborne.selenide.SelenideElement;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
-import org.testng.Assert;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
-import static org.testng.Assert.assertTrue;
 
 @Slf4j
 @Component
@@ -45,9 +43,6 @@ public class AuthenticationPage extends BasePage {
     private SelenideElement receiveSpecialOffersButton = $("#optin");
     private SelenideElement registerButton = $$("span").filter(Condition.text("Register")).first();
 
-
-
-
     public void gotoCreateAccount(String emailAddress) {
         log.info("Attempting to advance to create account using {} email address", emailAddress);
         sendTextToField(createAccountField, emailAddress).pressEnter();
@@ -71,7 +66,6 @@ public class AuthenticationPage extends BasePage {
         sendTextToField(addressMobilePhoneField, "1234567890");
         sendTextToField(addressAliasField, "Work");
         registerAccount();
-        assertTrue(errorNotPresent());
     }
 
     private void registerAccount() {
@@ -82,12 +76,6 @@ public class AuthenticationPage extends BasePage {
         log.info("Attempting to log in using {} email and {} password.", emailAddress, password);
         sendTextToField(emailField, emailAddress);
         sendTextToField(passwordField, password).pressEnter();
-    }
-
-    public void login() {
-        log.info("Logging in with default credentials.");
-        sendTextToField(emailField, "");
-        sendTextToField(passwordField, "password");
     }
 
     public boolean authenticationFailed() {

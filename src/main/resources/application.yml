@@ -1,3 +1,8 @@
 tests:
 
   baseUrl: http://automationpractice.com/index.php
+
+logging:
+  level:
+    org.springboot: INFO
+    com.automationpractice: INFO

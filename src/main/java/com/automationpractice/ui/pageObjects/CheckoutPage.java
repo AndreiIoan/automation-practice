@@ -2,8 +2,11 @@ package com.automationpractice.ui.pageObjects;
 
 import com.automationpractice.configuration.BasePage;
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.SelenideElement;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import static com.codeborne.selenide.Selenide.$;
@@ -13,7 +16,7 @@ import static com.codeborne.selenide.Selenide.$$;
 @Component
 public class CheckoutPage extends BasePage {
 
-    private SelenideElement termsOfServiceCheckboxButton = $("#cgv");
+    private SelenideElement termsOfServiceCheckboxButton = $("label[for='cgv']");
     private SelenideElement proceedToCheckoutButton = $$("span").filter(Condition.text("Proceed to checkout")).first();
     private SelenideElement payByBankwireButton = $(".bankwire");
     private SelenideElement confirmOrderButton = $$("span").filter(Condition.text("I confirm my order")).first();

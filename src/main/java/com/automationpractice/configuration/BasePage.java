@@ -3,16 +3,25 @@ package com.automationpractice.configuration;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.SelenideElement;
-import lombok.extern.slf4j.Slf4j;
+import org.openqa.selenium.WebElement;
 
 import java.util.Random;
 
 import static com.codeborne.selenide.Selenide.$$;
+import static com.codeborne.selenide.Selenide.switchTo;
 
-@Slf4j
+
 public abstract class BasePage {
 
     public static String generatedEmailAddress;
+
+    public static void switchToFrame(String frameId) {
+        switchTo().frame(frameId);
+    }
+
+    protected static void switchToFrame(WebElement webElement) {
+        switchTo().frame(webElement);
+    }
 
     protected SelenideElement sendTextToField(SelenideElement selenideElement, String text) {
         return selenideElement.waitUntil(Condition.exist, Configuration.timeout).setValue(text);
@@ -26,7 +35,7 @@ public abstract class BasePage {
         selenideElement.waitUntil(Condition.exist, Configuration.timeout).click();
     }
 
-    protected boolean errorNotPresent() {
+    public static boolean errorNotPresent() {
         return $$("div.alert").size() == 0;
     }
 
