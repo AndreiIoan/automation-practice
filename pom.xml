@@ -138,11 +138,7 @@
                 <configuration>
                     <suiteXmlFiles>testng.xml</suiteXmlFiles>
                     <parallel>methods</parallel>
-                    <threadCount>4</threadCount>
-					<systemPropertyVariables>
-						<org.slf4j.simpleLogger.defaultLogLevel>DEBUG</org.slf4j.simpleLogger.defaultLogLevel>
-						<org.slf4j.simpleLogger.showDateTime>true</org.slf4j.simpleLogger.showDateTime>
-					</systemPropertyVariables>
+                    <threadCount>3</threadCount>
                 </configuration>
             </plugin>
         </plugins>
