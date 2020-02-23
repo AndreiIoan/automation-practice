@@ -1,4 +1,3 @@
-@Category
 Feature: Tests category page functionality
 
   Background:
