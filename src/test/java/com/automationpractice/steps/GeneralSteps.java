@@ -8,8 +8,6 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import static com.automationpractice.configuration.BasePage.errorNotPresent;
@@ -64,6 +62,10 @@ public class GeneralSteps {
             assertTrue(authenticationPage.authenticationFailed());
             log.info("Failed to authenticate user.");
         } else {
+            if(!homepage.userIsAuthenticated()) {
+                homepage.navigateToPage("Sign in");
+                authenticationPage.login();
+            }
             assertTrue(myAccountPage.amOnAccountPage());
             log.info("Successfully authenticated user.");
         }
@@ -147,10 +149,50 @@ public class GeneralSteps {
 
     @Then("the user can (.*) product quantity")
     public void userCanIncreaseOrDecreaseProductQuantity(String increaseOrDecrease) {
-        if(increaseOrDecrease.equals("increase"))
+        int beforeQuantityChange = productPage.getProductQuantity();
+        if(increaseOrDecrease.equals("increase")) {
             productPage.increaseQuantity();
-        else
+            int afterQuantityChange = productPage.getProductQuantity();
+            assertTrue(beforeQuantityChange != afterQuantityChange);
+        } else {
+            productPage.increaseQuantity();
             productPage.decreaseQuantity();
+            int afterQuantityChange = productPage.getProductQuantity();
+            assertEquals(afterQuantityChange, beforeQuantityChange);
+        }
+    }
+
+    @And("the user removes the product from the cart")
+    public void userRemovedProductFromCart() {
+        homepage.continueShopping();
+        homepage.removeProductsFromCart();
+    }
+
+    @Then("the product should be removed from the cart")
+    public void productIsRemovedFromCart() {
+        categoryPage.gotoCartPage();
+        assertTrue(cartPage.cartIsEmpty());
+    }
+
+    @When("the user adds a product to the wishlist")
+    public void addProductToWishlist() {
+        homepage.navigateToPage("Women");
+        categoryPage.addProductToWishList();
+        if(homepage.userIsAuthenticated())
+            assertTrue(categoryPage.addToWishlistSucessful());
+    }
+
+    @Then("the user should be able to view the product in the wishlist")
+    public void userShouldBeAbleToSeeProductInWishlist() {
+        categoryPage.closeErrorMessage();
+        homepage.gotoMyAccount();
+        myAccountPage.gotoAccountLink("My wishlists");
+        assertTrue(myAccountPage.wishlistPresent());
+    }
+
+    @Then("the user should not be able to add it unless he logs in")
+    public void userShouldNotBeAbleToAddToWishlistUnlessLoggedIn() {
+        assertTrue(categoryPage.addToWishlistFailed());
     }
 
 }

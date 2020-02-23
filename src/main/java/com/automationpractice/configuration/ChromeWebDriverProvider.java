@@ -17,10 +17,8 @@ import org.springframework.core.io.ResourceLoader;
 
 import java.io.IOException;
 
-
+@Slf4j
 public class ChromeWebDriverProvider implements WebDriverProvider {
-
-    private static final Logger log = LoggerFactory.getLogger(ChromeWebDriverProvider.class);
 
     private ResourceLoader resourceLoader = new GenericApplicationContext();
     private String CHROMEDRIVER_PATH;

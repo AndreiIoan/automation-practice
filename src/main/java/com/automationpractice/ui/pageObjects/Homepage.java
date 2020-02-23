@@ -24,6 +24,10 @@ public class Homepage extends BasePage {
     private SelenideElement quickViewButton = $("a.quick-view");
     private SelenideElement cartContainerPopup = $("#layer_cart");
     private List<SelenideElement> homepageProducts = $$("img[itemprop='image']").filter(Condition.visible);
+    private SelenideElement continueShoppingButton = $("span[title='Continue shopping']");
+    private SelenideElement cartButton = $("a[title='View my shopping cart']");
+    private List<SelenideElement> removeProductFromCartDropdown = $$("a.ajax_cart_block_remove_link");
+    private SelenideElement viewAccount = $("a[title='View my customer account']");
 
     public void navigateToPage(String pageName) {
         log.info("Accessing {} page", pageName);
@@ -75,9 +79,27 @@ public class Homepage extends BasePage {
         homepageProducts.get(0).hover();
     }
 
+    public void continueShopping() {
+        log.info("Pressing continue shopping button.");
+        clickElement(continueShoppingButton);
+    }
+
+    public void removeProductsFromCart() {
+        log.info("Removing product from cart.");
+        cartButton.hover();
+        if(removeProductFromCartDropdown.size() == 0)
+            log.info("There are no products to remove.");
+        else
+            removeProductFromCartDropdown.forEach(SelenideElement::click);
+    }
+
     public void logout() {
         log.info("Logging out.");
         clickElement($$("a").filter(Condition.text("Sign out")).first().waitUntil(Condition.appears, Configuration.timeout));
+    }
+
+    public void gotoMyAccount() {
+        clickElement(viewAccount);
     }
 
     public boolean userIsAuthenticated() {

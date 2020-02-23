@@ -4,8 +4,6 @@ import com.automationpractice.configuration.BasePage;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -21,7 +19,11 @@ public class CategoryPage extends BasePage {
     private SelenideElement cartButton = $("a[title='View my shopping cart']");
     private SelenideElement quickViewButton = $("a.quick-view");
     private SelenideElement continueShoppingButton = $("span[title='Continue shopping']");
-    private List<SelenideElement> homepageProducts = $$("img[itemprop='image']").filter(Condition.visible);
+    private List<SelenideElement> products = $$("img[itemprop='image']").filter(Condition.visible);
+    private List<SelenideElement> wishlistError = $$("p.fancybox-error");
+    private SelenideElement addToWishlistButton = $("a.addToWishlist");
+    private SelenideElement wishlistSuccess = $("p.fancybox-error");
+    private SelenideElement closeErrorMessage = $("a[title='Close']");
 
     public void gotoCartPage() {
         log.info("Opening the shopping cart.");
@@ -49,8 +51,25 @@ public class CategoryPage extends BasePage {
         return $$("img[itemprop='image']").filter(Condition.visible).size() != 0;
     }
 
+    public void addProductToWishList() {
+        products.get(0).hover();
+        clickElement(addToWishlistButton);
+    }
+
+    public boolean addToWishlistFailed() {
+        return wishlistError.size() != 0;
+    }
+
+    public boolean addToWishlistSucessful() {
+        return wishlistSuccess.getText().equals("Added to your wishlist.");
+    }
+
+    public void closeErrorMessage() {
+        clickElement(closeErrorMessage);
+    }
+
     private void hoverFirstProduct() {
         log.info("Hovering over the first product.");
-        homepageProducts.get(0).hover();
+        products.get(0).hover();
     }
 }

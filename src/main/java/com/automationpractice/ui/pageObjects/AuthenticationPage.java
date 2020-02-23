@@ -62,7 +62,7 @@ public class AuthenticationPage extends BasePage {
         selectValueFromDropdown(addressStateDropdown, "Washington");
         sendTextToField(addressPostalCodeField, "12345");
         if(!addressCountryDropdown.getSelectedOption().getText().equals("United States"))
-            selectValueFromDropdown(addressCountryDropdown, "Andrei");
+            selectValueFromDropdown(addressCountryDropdown, "United States");
         sendTextToField(addressMobilePhoneField, "1234567890");
         sendTextToField(addressAliasField, "Work");
         registerAccount();
@@ -76,6 +76,12 @@ public class AuthenticationPage extends BasePage {
         log.info("Attempting to log in using {} email and {} password.", emailAddress, password);
         sendTextToField(emailField, emailAddress);
         sendTextToField(passwordField, password).pressEnter();
+    }
+
+    public void login() {
+        log.info("Logging in with default credentials");
+        sendTextToField(emailField, "andreitest@test.com");
+        sendTextToField(passwordField, "password").pressEnter();
     }
 
     public boolean authenticationFailed() {

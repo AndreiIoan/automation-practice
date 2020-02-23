@@ -2,6 +2,7 @@ package com.automationpractice.ui.pageObjects;
 
 import com.automationpractice.configuration.BasePage;
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.SelenideElement;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -17,15 +18,13 @@ public class ProductPage extends BasePage {
 
     private List<SelenideElement> sizeOptions = sizeDropdownContainer().$$("option");
     private SelenideElement addToCartButton = $$("span").filter(Condition.text("Add to cart")).first();
-    private SelenideElement addToWishlistButton = $("#wishlist_button");
-    private SelenideElement increaseQtyButton = $("a.product_quantity_down");
-    private SelenideElement decreaseQtyButton = $("a.product_quantity_up");
+    private SelenideElement addToWishlistButton = $("a.addToWishlist");
+    private SelenideElement increaseQtyButton = $("a.product_quantity_up");
+    private SelenideElement decreaseQtyButton = $("a.product_quantity_down");
     private SelenideElement increaseImageSizeButton = $$("span").filter(Condition.text("View larger")).first();
     private SelenideElement closeZoomedImageButton = $("a[title='Close']");
     private SelenideElement colorContainer = $("#color_to_pick_list");
     private SelenideElement quantityField = $("#quantity_wanted");
-
-    private static int initialQty;
 
     public void selectSize(String size) {
         clickElement(sizeDropdownContainer());
@@ -76,9 +75,8 @@ public class ProductPage extends BasePage {
         clickElement(closeZoomedImageButton);
     }
 
-    public boolean productQuantityChanged() {
-        int initialQty = Integer.parseInt(quantityField.getValue());
-        return true;
+    public int getProductQuantity() {
+        return Integer.parseInt(quantityField.waitUntil(Condition.appears, Configuration.timeout).getValue());
     }
 
     private SelenideElement sizeDropdownContainer() {
