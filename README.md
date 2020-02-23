@@ -12,3 +12,6 @@ In order to run only the "Happy path" test, the following parameter should be ad
 tests location: automation-practice/src/test/resources/features/
 
 tech and libraries used: Java, Selenide, Cucumber, Springboot, TestNG, Maven
+
+Chrome version: Version 80.0.3987.116
+chromedriver.exe is already provided in the resources for this chrome version
