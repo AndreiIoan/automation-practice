@@ -71,14 +71,15 @@ public class GeneralSteps {
 
     @And("the user adds a product to the cart from (.*)")
     public void addProductToCart(String page) {
-        if(page.equals("homepage"))
+        if(page.equalsIgnoreCase("homepage")) {
             homepage.quickViewProduct();
+            quickViewPage.switchToQuickViewFrame();
+            quickViewPage.selectSize("M");
+            quickViewPage.selectRandomNotSelectedColor();
+            quickViewPage.addToCart();
+        }
         else
-            categoryPage.quickViewProduct();
-        quickViewPage.switchToQuickViewFrame();
-        quickViewPage.selectSize("M");
-        quickViewPage.selectRandomNotSelectedColor();
-        quickViewPage.addToCart();
+            categoryPage.addProductToCart();
     }
 
     @And("finishes the checkout process through (.*)")
@@ -135,7 +136,8 @@ public class GeneralSteps {
     @Then("the product should be added to the cart")
     public void productIsAddedToCart() {
         categoryPage.continueShopping();
-        assertFalse(homepage.cartIsEmpty());
+        categoryPage.gotoCartPage();
+        assertFalse(cartPage.cartIsEmpty());
     }
 
     @When("the user goes to the product page")

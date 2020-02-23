@@ -23,6 +23,9 @@ public class ProductPage extends BasePage {
     private SelenideElement increaseImageSizeButton = $$("span").filter(Condition.text("View larger")).first();
     private SelenideElement closeZoomedImageButton = $("a[title='Close']");
     private SelenideElement colorContainer = $("#color_to_pick_list");
+    private SelenideElement quantityField = $("#quantity_wanted");
+
+    private static int initialQty;
 
     public void selectSize(String size) {
         clickElement(sizeDropdownContainer());
@@ -74,6 +77,7 @@ public class ProductPage extends BasePage {
     }
 
     public boolean productQuantityChanged() {
+        int initialQty = Integer.parseInt(quantityField.getValue());
         return true;
     }
 

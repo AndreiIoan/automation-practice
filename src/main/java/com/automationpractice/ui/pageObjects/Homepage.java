@@ -83,8 +83,4 @@ public class Homepage extends BasePage {
     public boolean userIsAuthenticated() {
         return $$("a").filter(Condition.text("Sign out")).size() != 0;
     }
-
-    public boolean cartIsEmpty() {
-        return $$("span[class='ajax_cart_no_product']").size() != 0;
-    }
 }

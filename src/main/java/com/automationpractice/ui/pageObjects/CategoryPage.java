@@ -18,9 +18,15 @@ import static com.codeborne.selenide.Selenide.$$;
 public class CategoryPage extends BasePage {
 
     private SelenideElement addToCartButton = $("a[title='Add to cart']");
+    private SelenideElement cartButton = $("a[title='View my shopping cart']");
     private SelenideElement quickViewButton = $("a.quick-view");
     private SelenideElement continueShoppingButton = $("span[title='Continue shopping']");
     private List<SelenideElement> homepageProducts = $$("img[itemprop='image']").filter(Condition.visible);
+
+    public void gotoCartPage() {
+        log.info("Opening the shopping cart.");
+        clickElement(cartButton);
+    }
 
     public void addProductToCart() {
         log.info("Adding product to cart.");

@@ -36,7 +36,7 @@ public class ChromeWebDriverProvider implements WebDriverProvider {
     @Override
     public WebDriver createDriver(DesiredCapabilities capabilities) {
         System.setProperty("webdriver.chrome.driver", CHROMEDRIVER_PATH);
-        System.setProperty("webdriver.chrome.logfile", "E:\\chromedriver.log");
+        System.setProperty("webdriver.chrome.logfile", "chromedriver.log");
         System.setProperty("webdriver.chrome.verboseLogging", "true");
         ChromeOptions options = createChromeOptions();
         return new ChromeDriver(options);

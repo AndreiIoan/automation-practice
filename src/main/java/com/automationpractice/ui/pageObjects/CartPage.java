@@ -21,4 +21,8 @@ public class CartPage extends BasePage {
         clickElement(proceedToCheckoutButton);
     }
 
+    public boolean cartIsEmpty() {
+        return $$("p").filter(Condition.text("Your shopping cart is empty.")).first().isDisplayed();
+    }
+
 }

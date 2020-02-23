@@ -13,7 +13,8 @@ Feature: Tests category page functionality
       | Dresses  |
       | T-shirts |
 
+    @AddProduct
   Scenario: Product can be added to cart from category page
     When The user navigates to the Women page
-    And the user adds a product to the cart from CategoryPage
+    And the user adds a product to the cart from Category Page
     Then the product should be added to the cart
