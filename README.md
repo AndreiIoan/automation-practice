@@ -16,7 +16,7 @@ tech and libraries used: Java, Selenide, Cucumber, Springboot, TestNG, Maven
 Chrome version: Version 80.0.3987.116
 chromedriver.exe is already provided in the resources for this chrome version
 
-Note: if WebDriverException error is present when the test attempts to go to the ProductPage, due to a different chrome browser version, the workaround would be to change the *gotoProductPage()* as follows: 
+Note: if WebDriverException error is present when the test attempts to go to the ProductPage, due to a different chrome browser version, the workaround would be to change the *gotoProductPage()* method in Homepage.java class as follows: 
 
 public void gotoProductPage() {
         javascriptExecutor jse = (JavascriptExecutor)getWebDriver();
