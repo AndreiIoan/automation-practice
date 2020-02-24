@@ -34,8 +34,10 @@ public class QuickViewPage extends BasePage {
     public void selectSize(String size) {
         clickElement(sizeDropdownContainer());
         for (SelenideElement selenideElement : sizeOptions) {
-            if (selenideElement.text().equals(size))
+            if (selenideElement.text().equals(size)) {
                 clickElement(selenideElement);
+                break;
+            }
         }
         log.info("Selecting {} size.", size);
     }
@@ -46,6 +48,7 @@ public class QuickViewPage extends BasePage {
             if (!color.parent().attr("class").equals("selected")) {
                 clickElement(color);
                 log.info("Selecting {} color.", color.attr("name"));
+                break;
             }
         }
     }
