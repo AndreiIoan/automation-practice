@@ -71,13 +71,15 @@ public class GeneralSteps {
         }
     }
 
-    @And("the user adds a product to the cart from (.*)")
-    public void addProductToCart(String page) {
+    @And("the user adds a product to the cart from (.*) (.*) changing size and color")
+    public void addProductToCart(String page, String withOrWithout) {
         if(page.equalsIgnoreCase("homepage")) {
             homepage.quickViewProduct();
             quickViewPage.switchToQuickViewFrame();
-            quickViewPage.selectSize("M");
-            quickViewPage.selectRandomNotSelectedColor();
+            if(withOrWithout.equals("with")) {
+                quickViewPage.selectSize("M");
+                quickViewPage.selectRandomNotSelectedColor();
+            }
             quickViewPage.addToCart();
         }
         else
