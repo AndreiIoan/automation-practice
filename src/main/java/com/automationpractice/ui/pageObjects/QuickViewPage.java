@@ -20,8 +20,8 @@ public class QuickViewPage extends BasePage {
     private List<SelenideElement> sizeOptions = sizeDropdownContainer().$$("option");
     private SelenideElement addToCartButton = $$("span").filter(Condition.text("Add to cart")).first();
     private SelenideElement addToWishlistButton = $("#wishlist_button");
-    private SelenideElement increaseQtyButton = $("a.product_quantity_down");
-    private SelenideElement decreaseQtyButton = $("a.product_quantity_up");
+    private SelenideElement increaseQtyButton = $("a.product_quantity_up");
+    private SelenideElement decreaseQtyButton = $("a.product_quantity_down");
     private SelenideElement increaseImageSizeButton = $$("span").filter(Condition.text("View larger")).first();
     private SelenideElement closeZoomedImageButton = $("a[title='Close']");
     private SelenideElement colorContainer = $("#color_to_pick_list");
